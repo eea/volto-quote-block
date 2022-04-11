@@ -1,0 +1,115 @@
+@import './globals.less';
+
+@addon: 'volto-addons';
+@addontype: 'quoteBlock';
+@addonelement: 'pullquote';
+
+.loadAddonVariables();
+
+/*******************************
+            Pullquote
+*******************************/
+
+#page-edit {
+  .eea.pullquote {
+    .author,
+    .meta {
+      > * {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.eea.pullquote {
+  display: flex;
+  flex-flow: column;
+  padding: @pullquotePadding;
+  margin: @pullquoteMargin;
+  word-break: @contentWordBreak;
+  hyphens: @contentWordBreakHyphens;
+
+  .quotes.wrapper {
+    display: flex;
+
+    .quote {
+      padding: @mobileQuotePadding;
+      text-indent: @mobileQuoteIconSize;
+      margin: 0;
+    }
+
+    i.icon {
+      display: flex;
+      align-items: flex-end;
+      font-size: @mobileQuoteIconSize;
+      line-height: @mobileQuoteIconSize;
+      color: @quoteIconColor;
+    }
+
+    i.icomn:first-child {
+      align-self: flex-start
+    }
+
+    i.icon:last-child {
+      align-self: flex-end;
+    }
+  }
+
+  .author {
+    color: @authorTextColor;
+    text-align: @authorTextAlign;
+    font-weight: @authorFontWeight;
+    font-size: @authorFontSize;
+    margin: @authorMargin;
+  }
+
+  .meta {
+    text-align: @metaTextAlign;
+    font-weight: @metaFontWeight;
+    font-size: @metaFontSize;
+  }
+
+  &.reversed {
+    flex-flow: column-reverse;
+
+    .info.wrapper {
+      margin-bottom: 1rem;
+    }
+
+    .author {
+      text-align: left;
+    }
+
+    .meta {
+      text-align: left;
+    }
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .eea.pullquote {
+    .quotes.wrapper {
+      .quote {
+        padding: @tabletQuotePadding;
+        text-indent: @tabletQuoteIconSize;
+      }
+
+      i.icon {
+        font-size: @tabletQuoteIconSize;
+        line-height: @tabletQuoteIconSize;
+      }
+    }
+  }
+  .eea.pullquote.left {
+    width: @maxWidthOnFloat;
+    padding: @pullquoteFloatLeftPadding;
+    float: left;
+  }
+  .eea.pullquote.right {
+    width: @maxWidthOnFloat;
+    padding: @pullquoteFloatRightPadding;
+    float: right;
+  }
+}
+
+.loadAddonVariables();

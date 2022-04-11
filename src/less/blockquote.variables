@@ -1,0 +1,42 @@
+/*******************************
+            Blockquote
+*******************************/
+/* Body */
+@mobileBlockquoteBorderLeft : @5px solid @secondaryColor;
+@tabletBlockquoteBorderLeft : @10px solid @secondaryColor;
+@blockquoteFloatLeftMargin  : @largeGap @largeGap @largeGap 0;
+@blockquoteFloatRightMargin : @largeGap 0 @largeGap @largeGap;
+@maxWidthOnFloat            : 50%;
+
+/* Quote */
+@mobileQuotePadding     : 0 0.625rem;
+@tabletQuotePadding     : 0 1rem;
+@computerQuotePadding   : 0 1.25rem;
+@quoteMargin            : 0;
+@quoteWithInfoMargin    : 0 0 1.25rem 0;
+@quoteReversedMargin    : 0;
+@quoteColor             : @japaneseIndigo;
+@mobileQuoteFontSize    : 0.688rem;
+@tabletQuoteFontSize    : @h6;
+@computerQuoteFontSize  : @h5;
+
+/* Author */
+@authorTextColor          : @darkCyan;
+@authorTextAlign          : left;
+@authorReversedTextAlign  : left;
+@authorFontSize           : 1.25rem;
+@authorFontWeight         : @bold;
+@authorMargin             : 0;
+
+/* Meta */
+@metaTextAlign          : left;
+@metaReversedTextAlign  : left;
+@metaFontSize           : 1rem;
+@metaFontWeight         : 400;
+@metaMargin             : 0;
+
+/* Callout */
+@calloutBorder        : none;
+@calloutBoxShadow     : none;
+@calloutBorderRadius  : 0;
+@calloutPadding       : 0;

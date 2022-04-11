@@ -1,0 +1,116 @@
+@import './globals.less';
+
+@addon: 'volto-addons';
+@addontype: 'quoteBlock';
+@addonelement: 'blockquote';
+
+.loadAddonVariables();
+
+/*******************************
+            Blockquote
+*******************************/
+
+#page-edit {
+  .eea.blockquote-v1 {
+    .author,
+    .meta {
+      margin-bottom: 0;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.eea.blockquote-v1 {
+  display: flex;
+  flex-flow: column;
+  margin: 0;
+  padding: @mobileQuotePadding;
+  border: @calloutBorder;
+  box-shadow: @calloutBoxShadow;
+  border-radius: @calloutBorderRadius;
+  border-left: @mobileBlockquoteBorderLeft;
+
+  .quote {
+    font-size: @mobileQuoteFontSize;
+    color: @quoteColor;
+    margin: @quoteMargin;
+  }
+
+  .author {
+    color: @authorTextColor;
+    text-align: @authorTextAlign;
+    font-weight: @authorFontWeight;
+    font-size: @authorFontSize;
+    margin: @authorMargin;
+  }
+
+  .meta {
+    text-align: @metaTextAlign;
+    font-weight: @metaFontWeight;
+    font-size: @metaFontSize;
+  }
+
+  &.with-info {
+    .quote {
+      margin: @quoteWithInfoMargin;
+    }
+  }
+
+  &.reversed {
+    flex-flow: column-reverse;
+
+    .quote {
+      margin: @quoteReversedMargin;
+    }
+
+    .info.wrapper {
+      margin-bottom: 1.25rem;
+    }
+
+    .author {
+      text-align: @authorReversedTextAlign;
+    }
+
+    .meta {
+      text-align: @metaReversedTextAlign;
+    }
+  }
+}
+
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .eea.blockquote-v1 {
+    border-left: @tabletBlockquoteBorderLeft;
+    padding: @tabletQuotePadding;
+
+    .quote {
+      font-size: @tabletQuoteFontSize;
+    }
+  }
+
+  .eea.blockquote-v1.left {
+    width: @maxWidthOnFloat;
+    margin: @blockquoteFloatLeftMargin;
+    float: left;
+  }
+  .eea.blockquote-v1.right {
+    width: @maxWidthOnFloat;
+    margin: @blockquoteFloatRightMargin;
+    float: right;
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) {
+  .eea.blockquote-v1 {
+    padding: @computerQuotePadding;
+
+    .quote {
+      font-size: @computerQuoteFontSize;
+    }
+  }
+}
+
+.loadAddonVariables();
