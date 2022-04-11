@@ -16,6 +16,9 @@
     "type": "git",
     "url": "git@github.com:eea/volto-quote-block.git"
   },
+  "addons": [
+    "volto-slate"
+  ],
   "dependencies": {
     "@plone/scripts": "*",
     "volto-slate": "*"
