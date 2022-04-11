@@ -2,11 +2,7 @@ import { defineMessages } from 'react-intl';
 import { makeInlineElementPlugin } from 'volto-slate/components/ElementEditor';
 import Quote from './Quote';
 import quoteSchema from './schema';
-import {
-  withBlockquote,
-  withBeforeInsertFragment,
-  withTest,
-} from './extensions';
+import { withBlockquote, withBeforeInsertFragment } from './extensions';
 
 import quoteIcon from '@plone/volto/icons/quote.svg';
 
