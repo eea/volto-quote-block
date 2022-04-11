@@ -26,31 +26,31 @@
 .eea.blockquote-v1 {
   display: flex;
   flex-flow: column;
-  margin: 0;
   padding: @mobileQuotePadding;
   border: @calloutBorder;
-  box-shadow: @calloutBoxShadow;
-  border-radius: @calloutBorderRadius;
   border-left: @mobileBlockquoteBorderLeft;
+  margin: 0;
+  border-radius: @calloutBorderRadius;
+  box-shadow: @calloutBoxShadow;
 
   .quote {
-    font-size: @mobileQuoteFontSize;
-    color: @quoteColor;
     margin: @quoteMargin;
+    color: @quoteColor;
+    font-size: @mobileQuoteFontSize;
   }
 
   .author {
-    color: @authorTextColor;
-    text-align: @authorTextAlign;
-    font-weight: @authorFontWeight;
-    font-size: @authorFontSize;
     margin: @authorMargin;
+    color: @authorTextColor;
+    font-size: @authorFontSize;
+    font-weight: @authorFontWeight;
+    text-align: @authorTextAlign;
   }
 
   .meta {
-    text-align: @metaTextAlign;
-    font-weight: @metaFontWeight;
     font-size: @metaFontSize;
+    font-weight: @metaFontWeight;
+    text-align: @metaTextAlign;
   }
 
   &.with-info {
@@ -80,11 +80,10 @@
   }
 }
 
-
 @media only screen and (min-width: @tabletBreakpoint) {
   .eea.blockquote-v1 {
-    border-left: @tabletBlockquoteBorderLeft;
     padding: @tabletQuotePadding;
+    border-left: @tabletBlockquoteBorderLeft;
 
     .quote {
       font-size: @tabletQuoteFontSize;
@@ -96,6 +95,7 @@
     margin: @blockquoteFloatLeftMargin;
     float: left;
   }
+
   .eea.blockquote-v1.right {
     width: @maxWidthOnFloat;
     margin: @blockquoteFloatRightMargin;

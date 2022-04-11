@@ -18,8 +18,7 @@ const View = (props) => {
       });
     }
     /* eslint-disable-next-line */
-    }, []);
-
+  }, []);
 
   return <Quote {...props} />;
 };

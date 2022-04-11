@@ -26,28 +26,28 @@
   flex-flow: column;
   padding: @pullquotePadding;
   margin: @pullquoteMargin;
-  word-break: @contentWordBreak;
   hyphens: @contentWordBreakHyphens;
+  word-break: @contentWordBreak;
 
   .quotes.wrapper {
     display: flex;
 
     .quote {
       padding: @mobileQuotePadding;
-      text-indent: @mobileQuoteIconSize;
       margin: 0;
+      text-indent: @mobileQuoteIconSize;
     }
 
     i.icon {
       display: flex;
       align-items: flex-end;
+      color: @quoteIconColor;
       font-size: @mobileQuoteIconSize;
       line-height: @mobileQuoteIconSize;
-      color: @quoteIconColor;
     }
 
     i.icomn:first-child {
-      align-self: flex-start
+      align-self: flex-start;
     }
 
     i.icon:last-child {
@@ -56,17 +56,17 @@
   }
 
   .author {
-    color: @authorTextColor;
-    text-align: @authorTextAlign;
-    font-weight: @authorFontWeight;
-    font-size: @authorFontSize;
     margin: @authorMargin;
+    color: @authorTextColor;
+    font-size: @authorFontSize;
+    font-weight: @authorFontWeight;
+    text-align: @authorTextAlign;
   }
 
   .meta {
-    text-align: @metaTextAlign;
-    font-weight: @metaFontWeight;
     font-size: @metaFontSize;
+    font-weight: @metaFontWeight;
+    text-align: @metaTextAlign;
   }
 
   &.reversed {
@@ -100,11 +100,13 @@
       }
     }
   }
+
   .eea.pullquote.left {
     width: @maxWidthOnFloat;
     padding: @pullquoteFloatLeftPadding;
     float: left;
   }
+
   .eea.pullquote.right {
     width: @maxWidthOnFloat;
     padding: @pullquoteFloatRightPadding;
