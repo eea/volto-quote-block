@@ -15,6 +15,26 @@ import {
 
 import '@eeacms/volto-quote-block/less/blockquote.less';
 
+const BlockquoteWrapper = (props) => {
+  const { children, index, block, mode, handleKeyDown } = props;
+  return mode === 'edit' ? (
+    <div
+      role="presentation"
+      onKeyDown={(e) => {
+        handleKeyDown(e, index, block, props.blockNode.current);
+      }}
+      style={{ outline: 'none' }}
+      // The tabIndex is required for the keyboard navigation
+      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+      tabIndex={0}
+    >
+      {children}
+    </div>
+  ) : (
+    children
+  );
+};
+
 const Blockquote = (props) => {
   const {
     data,
@@ -70,34 +90,16 @@ const Blockquote = (props) => {
         onFocusNextBlock(block, node, isMultipleSelection);
         e.preventDefault();
       }
-      if (e.key === 'Enter' && !disableEnter) {
+      if ((e.key === 'Return' || e.key === 'Enter') && !disableEnter) {
         onAddBlock(config.settings.defaultBlockType, index + 1);
+        e.preventDefault();
       }
     },
     [onAddBlock, onFocusPreviousBlock, onFocusNextBlock, mode, floated],
   );
 
-  const BlockquoteWrapper = ({ children }) => {
-    return mode === 'edit' ? (
-      <div
-        role="presentation"
-        onKeyDown={(e) => {
-          handleKeyDown(e, index, block, props.blockNode.current);
-        }}
-        style={{ outline: 'none' }}
-        // The tabIndex is required for the keyboard navigation
-        /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-        tabIndex={0}
-      >
-        {children}
-      </div>
-    ) : (
-      children
-    );
-  };
-
   return (
-    <BlockquoteWrapper>
+    <BlockquoteWrapper {...props} handleKeyDown={handleKeyDown}>
       {mode === 'edit' && floated && (
         <Message color="teal">
           <Message.Header>Click here to edit blockquote.</Message.Header>
