@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { Icon } from 'semantic-ui-react';
+import config from '@plone/volto/registry';
 import { serializeText } from '@eeacms/volto-quote-block/helpers';
 
 import '@eeacms/volto-quote-block/less/pullquote.less';
@@ -24,7 +25,7 @@ const Pullquote = ({ children, element }) => {
 
 Pullquote.Quote = ({ children, as: As, ...rest }) => (
   <div className="quotes wrapper">
-    <Icon className="ri-double-quotes-l"></Icon>
+    <Icon className={config.settings.slateQuote.icons.openQuote}></Icon>
     {As ? (
       <As className="quote" {...rest}>
         {children}
@@ -32,7 +33,7 @@ Pullquote.Quote = ({ children, as: As, ...rest }) => (
     ) : (
       <p className="quote">{children}</p>
     )}
-    <Icon className="ri-double-quotes-r"></Icon>
+    <Icon className={config.settings.slateQuote.icons.closeQuote}></Icon>
   </div>
 );
 

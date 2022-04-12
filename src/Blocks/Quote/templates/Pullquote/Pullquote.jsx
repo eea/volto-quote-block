@@ -17,6 +17,7 @@ import '@eeacms/volto-quote-block/less/pullquote.less';
 
 const Pullquote = (props) => {
   const { slate } = config.settings;
+  const { icons } = config.blocks.blocksConfig.quote.templates.default || {};
   const {
     data,
     mode,
@@ -110,7 +111,7 @@ const Pullquote = (props) => {
         })}
       >
         {mode === 'edit' && !floated ? (
-          <Pullquote.Quote>
+          <Pullquote.Quote icons={icons}>
             <SlateEditor
               index={index}
               properties={properties}
@@ -132,7 +133,9 @@ const Pullquote = (props) => {
             />
           </Pullquote.Quote>
         ) : (
-          <Pullquote.Quote>{serializeText(quote)}</Pullquote.Quote>
+          <Pullquote.Quote icons={icons}>
+            {serializeText(quote)}
+          </Pullquote.Quote>
         )}
         {withInfo && (
           <div className="info wrapper">
@@ -145,9 +148,9 @@ const Pullquote = (props) => {
   );
 };
 
-Pullquote.Quote = ({ children, as: As, ...rest }) => (
+Pullquote.Quote = ({ children, icons, as: As, ...rest }) => (
   <div className="quotes wrapper">
-    <Icon className="ri-double-quotes-l"></Icon>
+    <Icon className={icons.openQuote}></Icon>
     {As ? (
       <As className="quote" {...rest}>
         {children}
@@ -155,7 +158,7 @@ Pullquote.Quote = ({ children, as: As, ...rest }) => (
     ) : (
       <p className="quote">{children}</p>
     )}
-    <Icon className="ri-double-quotes-r"></Icon>
+    <Icon className={icons.closeQuote}></Icon>
   </div>
 );
 

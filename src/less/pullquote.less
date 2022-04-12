@@ -32,7 +32,7 @@
   .quotes.wrapper {
     display: flex;
 
-    .quote {
+    .quote:not(.icon) {
       padding: @mobileQuotePadding;
       margin: 0;
       text-indent: @mobileQuoteIconSize;
@@ -69,6 +69,14 @@
     text-align: @metaTextAlign;
   }
 
+  i.icon.quote.left:before {
+    content: @openQuote;
+  }
+
+  i.icon.quote.right:before {
+    content: @closeQuote;
+  }
+
   &.reversed {
     flex-flow: column-reverse;
 
@@ -89,7 +97,7 @@
 @media only screen and (min-width: @tabletBreakpoint) {
   .eea.pullquote {
     .quotes.wrapper {
-      .quote {
+      .quote:not(.icon) {
         padding: @tabletQuotePadding;
         text-indent: @tabletQuoteIconSize;
       }

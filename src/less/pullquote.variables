@@ -16,7 +16,7 @@
 @tabletQuotePadding  : 0.5rem 0 0.5rem;
 
 /* Author */
-@authorTextColor          : @darkCyan;
+@authorTextColor          : #00928F;
 @authorTextAlign          : right;
 @authorReversedTextAlign  : left;
 @authorFontWeight         : @bold;
@@ -34,3 +34,5 @@
 @tabletQuoteIconSize : 3rem;
 @quoteIconColor      : @secondaryColor;
 @quoteDownIconFloat  : right;
+@openQuote           : open-quote;
+@closeQuote          : close-quote;

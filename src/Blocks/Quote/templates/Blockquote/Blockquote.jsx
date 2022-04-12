@@ -104,7 +104,7 @@ const Blockquote = (props) => {
         </Message>
       )}
       <blockquote
-        className={cx('eea blockquote-v1', position, {
+        className={cx('eea blockquote', position, {
           reversed,
           'with-info': withInfo,
         })}

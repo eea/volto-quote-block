@@ -34,5 +34,12 @@ export default (config) => {
   const [installQuote] = makeInlineElementPlugin(opts);
   config = installQuote(config);
 
+  config.settings.slateQuote = {
+    icons: {
+      openQuote: 'quote left',
+      closeQuote: 'quote right',
+    },
+  };
+
   return config;
 };

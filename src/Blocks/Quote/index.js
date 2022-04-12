@@ -17,6 +17,10 @@ export default (config) => {
       default: {
         title: 'Quote',
         view: PullquoteView,
+        icons: {
+          openQuote: 'quote left',
+          closeQuote: 'quote right',
+        },
       },
       blockquote: {
         title: 'Blockquote',

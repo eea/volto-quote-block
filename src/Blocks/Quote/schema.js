@@ -8,9 +8,7 @@ export default (props) => {
     templatesConfig[template].title || template,
   ]);
   const schema =
-    templatesConfig[
-      props.data?.template || config.blocks.blocksConfig.quote.defaultTemplate
-    ]?.schema || [];
+    templatesConfig[props.data?.template || 'default']?.schema || [];
   const templateSchema = typeof schema === 'function' ? schema(props) : schema;
   const defaultFieldset =
     templateSchema.fieldsets?.filter(
