@@ -1,0 +1,46 @@
+/*******************************
+            Blockquote
+*******************************/
+/* Body */
+@mobileBlockquoteBorderLeft : @5px solid @secondaryColor;
+@tabletBlockquoteBorderLeft : @10px solid @secondaryColor;
+@blockquoteFloatLeftMargin  : @largeGap @largeGap @largeGap 0;
+@blockquoteFloatRightMargin : @largeGap 0 @largeGap @largeGap;
+@maxWidthOnFloat            : 50%;
+
+/* Quote */
+@mobileQuotePadding     : 0 0.5rem;
+@tabletQuotePadding     : 0 1rem;
+@computerQuotePadding   : 0 1.25rem;
+@quoteMargin            : 0;
+@quoteWithInfoMargin    : 0 0 1.25rem 0;
+@quoteReversedMargin    : 0;
+@quoteColor             : #2E3E4C;
+@mobileQuoteFontSize    : 1rem;
+@tabletQuoteFontSize    : @h6;
+@computerQuoteFontSize  : @h5;
+
+/* Author */
+@authorTextColor          : #00928F;
+@authorTextAlign          : left;
+@authorReversedTextAlign  : left;
+@mobileAuthorFontSize     : 1rem;
+@tabletAuthorFontSize     : @h6;
+@computerAuthorFontSize   : @h5;
+@authorFontWeight         : @bold;
+@authorMargin             : 0;
+
+/* Meta */
+@metaTextAlign          : left;
+@metaReversedTextAlign  : left;
+@mobileMetaFontSize     : 1rem;
+@tabletMetaFontSize     : @h6;
+@computerMetaFontSize   : @h5;
+@metaFontWeight         : 400;
+@metaMargin             : 0;
+
+/* Callout */
+@calloutBorder        : none;
+@calloutBoxShadow     : none;
+@calloutBorderRadius  : 0;
+@calloutPadding       : 0;

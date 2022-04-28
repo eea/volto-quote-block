@@ -1,0 +1,132 @@
+@import './globals.less';
+
+@addon: 'volto-addons';
+@addontype: 'quoteBlock';
+@addonelement: 'blockquote';
+
+.loadAddonVariables();
+
+/*******************************
+            Blockquote
+*******************************/
+
+#page-edit {
+  .eea.blockquote {
+    .author,
+    .meta {
+      margin-bottom: 0;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.eea.blockquote {
+  display: flex;
+  flex-flow: column;
+  padding: @mobileQuotePadding;
+  border: @calloutBorder;
+  border-left: @mobileBlockquoteBorderLeft;
+  margin: 0;
+  border-radius: @calloutBorderRadius;
+  box-shadow: @calloutBoxShadow;
+
+  .quote {
+    margin: @quoteMargin;
+    color: @quoteColor;
+    font-size: @mobileQuoteFontSize;
+  }
+
+  .author {
+    margin: @authorMargin;
+    color: @authorTextColor;
+    font-size: @mobileAuthorFontSize;
+    font-weight: @authorFontWeight;
+    text-align: @authorTextAlign;
+  }
+
+  .meta {
+    font-size: @mobileMetaFontSize;
+    font-weight: @metaFontWeight;
+    text-align: @metaTextAlign;
+  }
+
+  &.with-info {
+    .quote {
+      margin: @quoteWithInfoMargin;
+    }
+  }
+
+  &.reversed {
+    flex-flow: column-reverse;
+
+    .quote {
+      margin: @quoteReversedMargin;
+    }
+
+    .info.wrapper {
+      margin-bottom: 1.25rem;
+    }
+
+    .author {
+      text-align: @authorReversedTextAlign;
+    }
+
+    .meta {
+      text-align: @metaReversedTextAlign;
+    }
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .eea.blockquote {
+    padding: @tabletQuotePadding;
+    border-left: @tabletBlockquoteBorderLeft;
+
+    .quote {
+      font-size: @tabletQuoteFontSize;
+    }
+
+    .author {
+      font-size: @tabletAuthorFontSize;
+    }
+
+    .meta {
+      font-size: @tabletMetaFontSize;
+    }
+  }
+
+  .eea.blockquote.left {
+    width: @maxWidthOnFloat;
+    margin: @blockquoteFloatLeftMargin;
+    float: left;
+  }
+
+  .eea.blockquote.right {
+    width: @maxWidthOnFloat;
+    margin: @blockquoteFloatRightMargin;
+    float: right;
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) {
+  .eea.blockquote {
+    padding: @computerQuotePadding;
+
+    .quote {
+      font-size: @computerQuoteFontSize;
+    }
+
+    .author {
+      font-size: @computerAuthorFontSize;
+    }
+
+    .meta {
+      font-size: @computerMetaFontSize;
+    }
+  }
+}
+
+.loadAddonVariables();

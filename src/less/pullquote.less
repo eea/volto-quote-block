@@ -1,0 +1,125 @@
+@import './globals.less';
+
+@addon: 'volto-addons';
+@addontype: 'quoteBlock';
+@addonelement: 'pullquote';
+
+.loadAddonVariables();
+
+/*******************************
+            Pullquote
+*******************************/
+
+#page-edit {
+  .eea.pullquote {
+    .author,
+    .meta {
+      > * {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.eea.pullquote {
+  display: flex;
+  flex-flow: column;
+  padding: @pullquotePadding;
+  margin: @pullquoteMargin;
+  hyphens: @contentWordBreakHyphens;
+  word-break: @contentWordBreak;
+
+  .quotes.wrapper {
+    display: flex;
+
+    .quote:not(.icon) {
+      padding: @mobileQuotePadding;
+      margin: 0;
+      text-indent: @mobileQuoteIconSize;
+    }
+
+    i.icon {
+      display: flex;
+      align-items: flex-end;
+      color: @quoteIconColor;
+      font-size: @mobileQuoteIconSize;
+      line-height: @mobileQuoteIconSize;
+    }
+
+    i.icomn:first-child {
+      align-self: flex-start;
+    }
+
+    i.icon:last-child {
+      align-self: flex-end;
+    }
+  }
+
+  .author {
+    margin: @authorMargin;
+    color: @authorTextColor;
+    font-size: @authorFontSize;
+    font-weight: @authorFontWeight;
+    text-align: @authorTextAlign;
+  }
+
+  .meta {
+    font-size: @metaFontSize;
+    font-weight: @metaFontWeight;
+    text-align: @metaTextAlign;
+  }
+
+  i.icon.quote.left:before {
+    content: @openQuote;
+  }
+
+  i.icon.quote.right:before {
+    content: @closeQuote;
+  }
+
+  &.reversed {
+    flex-flow: column-reverse;
+
+    .info.wrapper {
+      margin-bottom: 1rem;
+    }
+
+    .author {
+      text-align: left;
+    }
+
+    .meta {
+      text-align: left;
+    }
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .eea.pullquote {
+    .quotes.wrapper {
+      .quote:not(.icon) {
+        padding: @tabletQuotePadding;
+        text-indent: @tabletQuoteIconSize;
+      }
+
+      i.icon {
+        font-size: @tabletQuoteIconSize;
+        line-height: @tabletQuoteIconSize;
+      }
+    }
+  }
+
+  .eea.pullquote.left {
+    width: @maxWidthOnFloat;
+    padding: @pullquoteFloatLeftPadding;
+    float: left;
+  }
+
+  .eea.pullquote.right {
+    width: @maxWidthOnFloat;
+    padding: @pullquoteFloatRightPadding;
+    float: right;
+  }
+}
+
+.loadAddonVariables();
