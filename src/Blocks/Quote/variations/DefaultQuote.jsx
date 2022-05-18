@@ -1,21 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Icon, Message } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
 import SlateEditor from 'volto-slate/editor/SlateEditor';
 import { handleKey } from 'volto-slate/blocks/Text/keyboard';
-import { saveSlateBlockSelection } from 'volto-slate/actions';
 import {
   createSlateParagraph,
   isFloated,
   serializeText,
-  textNotEmpty,
 } from '@eeacms/volto-quote-block/helpers';
 
-import '@eeacms/volto-quote-block/less/pullquote.less';
-
-const PullquoteWrapper = (props) => {
+const QuoteWrapper = (props) => {
   const { children, index, block, mode, handleKeyDown } = props;
   return mode === 'edit' ? (
     <div
@@ -35,9 +30,9 @@ const PullquoteWrapper = (props) => {
   );
 };
 
-const Pullquote = (props) => {
+const Quote = (props) => {
   const { slate } = config.settings;
-  const { icons } = config.blocks.blocksConfig.quote.templates.default || {};
+  const { icons } = {};
   const {
     data,
     mode,
@@ -51,9 +46,8 @@ const Pullquote = (props) => {
     onFocusPreviousBlock,
     onSelectBlock,
   } = props;
-  const { quote, source, metadata, position = null, reversed = false } = data;
+  const { value, source, sourceInfo, position = null, reversed = false } = data;
   const floated = isFloated(position);
-  const withInfo = textNotEmpty(source || metadata);
 
   const withBlockProperties = React.useCallback(
     (editor) => {
@@ -99,75 +93,85 @@ const Pullquote = (props) => {
   );
 
   return (
-    <PullquoteWrapper {...props} handleKeyDown={handleKeyDown}>
+    <QuoteWrapper {...props} handleKeyDown={handleKeyDown}>
       {mode === 'edit' && floated && (
         <Message color="teal">
           <Message.Header>Click here to edit quote.</Message.Header>
         </Message>
       )}
       <blockquote
-        className={cx('eea pullquote', position, {
+        className={cx('eea quote', position, {
           reversed,
-          'with-info': withInfo,
         })}
       >
-        {mode === 'edit' && !floated ? (
-          <Pullquote.Quote icons={icons}>
-            <SlateEditor
-              index={index}
-              properties={properties}
-              extensions={slate.textblockExtensions}
-              renderExtensions={[withBlockProperties]}
-              value={createSlateParagraph(data.quote)}
-              onChange={(quote) => {
-                onChangeBlock(block, {
-                  ...data,
-                  quote,
-                });
-              }}
-              block={block}
-              onFocus={handleFocus}
-              onKeyDown={handleKey}
-              selected={selected}
-              placeholder="Add quote"
-              slateSettings={slate}
-            />
-          </Pullquote.Quote>
-        ) : (
-          <Pullquote.Quote icons={icons}>
-            {serializeText(quote)}
-          </Pullquote.Quote>
-        )}
-        {withInfo && (
-          <div className="info wrapper">
-            {source && <p className="author">{serializeText(source)}</p>}
-            {metadata && <p className="meta">{serializeText(metadata)}</p>}
-          </div>
-        )}
+        <div className="content">
+          {reversed && source && (
+            <Quote.Source>{serializeText(source)}</Quote.Source>
+          )}
+          {reversed && sourceInfo && (
+            <Quote.SourceInfo>{serializeText(sourceInfo)}</Quote.SourceInfo>
+          )}
+          {mode === 'edit' && !floated ? (
+            <Quote.Quote icons={icons}>
+              <SlateEditor
+                index={index}
+                properties={properties}
+                extensions={slate.textblockExtensions}
+                renderExtensions={[withBlockProperties]}
+                value={createSlateParagraph(value)}
+                onChange={(value) => {
+                  onChangeBlock(block, {
+                    ...data,
+                    value,
+                  });
+                }}
+                block={block}
+                onFocus={handleFocus}
+                onKeyDown={handleKey}
+                selected={selected}
+                placeholder="Add quote"
+                slateSettings={slate}
+              />
+            </Quote.Quote>
+          ) : (
+            <Quote.Quote icons={icons}>{serializeText(value)}</Quote.Quote>
+          )}
+          {!reversed && source && (
+            <Quote.Source>{serializeText(source)}</Quote.Source>
+          )}
+          {!reversed && sourceInfo && (
+            <Quote.SourceInfo>{serializeText(sourceInfo)}</Quote.SourceInfo>
+          )}
+        </div>
       </blockquote>
-    </PullquoteWrapper>
+    </QuoteWrapper>
   );
 };
 
-Pullquote.Quote = ({ children, icons, as: As, ...rest }) => (
+Quote.Quote = ({ children, as: As, ...rest }) => (
   <div className="quotes wrapper">
-    <Icon className={icons.openQuote}></Icon>
+    <Icon className="ri-double-quotes-l"></Icon>
     {As ? (
       <As className="quote" {...rest}>
         {children}
       </As>
     ) : (
-      <p className="quote">{children}</p>
+      <div className="quote">{children}</div>
     )}
-    <Icon className={icons.closeQuote}></Icon>
+    <Icon className="ri-double-quotes-r"></Icon>
   </div>
 );
 
-export default connect(
-  () => {
-    return {};
-  },
-  {
-    saveSlateBlockSelection,
-  },
-)(Pullquote);
+Quote.Source = ({ children, ...rest }) => (
+  <div className="source" {...rest}>
+    {children}
+  </div>
+);
+
+Quote.SourceInfo = ({ children, ...rest }) => (
+  <div className="info" {...rest}>
+    {children}
+  </div>
+);
+
+export default Quote;

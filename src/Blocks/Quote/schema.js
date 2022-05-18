@@ -2,44 +2,31 @@ import config from '@plone/volto/registry';
 
 export default (props) => {
   const { position } = props.data;
-  const templatesConfig = config.blocks.blocksConfig.quote?.templates;
-  const templates = Object.keys(templatesConfig).map((template) => [
-    template,
-    templatesConfig[template].title || template,
-  ]);
-  const schema =
-    templatesConfig[props.data?.template || 'default']?.schema || [];
-  const templateSchema = typeof schema === 'function' ? schema(props) : schema;
-  const defaultFieldset =
-    templateSchema.fieldsets?.filter(
-      (fieldset) => fieldset.id === 'default',
-    )[0] || {};
+  const variations = config.blocks.blocksConfig.quote.variations;
+
   return {
-    title: templateSchema.title || 'Quote',
+    title: 'Quote',
     fieldsets: [
       {
         id: 'default',
         title: 'Default',
         fields: [
-          'template',
+          'variation',
           ...(position && ['left', 'right'].includes(position)
-            ? ['quote']
+            ? ['value']
             : []),
           'reversed',
           'position',
           'source',
-          'metadata',
-          ...(defaultFieldset?.fields || []),
+          'sourceInfo',
         ],
       },
-      ...(templateSchema.fieldsets?.filter(
-        (fieldset) => fieldset.id !== 'default',
-      ) || []),
     ],
     properties: {
-      template: {
-        title: 'Template',
-        choices: templates,
+      variation: {
+        title: 'Variation',
+        choices: variations.map((extension) => [extension.id, extension.title]),
+        defaultValue: 'default',
       },
       reversed: {
         title: 'Reversed',
@@ -49,7 +36,7 @@ export default (props) => {
         title: 'Alignment',
         widget: 'align',
       },
-      quote: {
+      value: {
         title: 'Quote',
         widget: 'slate_richtext',
       },
@@ -57,12 +44,11 @@ export default (props) => {
         title: 'Source',
         widget: 'slate_richtext',
       },
-      metadata: {
-        title: 'Extra info',
+      sourceInfo: {
+        title: 'Source info',
         widget: 'slate_richtext',
       },
-      ...(templateSchema.properties || {}),
     },
-    required: [...(templateSchema.required || [])],
+    required: [],
   };
 };

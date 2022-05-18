@@ -1,26 +1,13 @@
-import React from 'react';
-import config from '@plone/volto/registry';
+import React, { useMemo } from 'react';
+import { withBlockExtensions } from '@plone/volto/helpers';
 
 import './styles.less';
 
 const View = (props) => {
-  const { data, mode, block, onChangeBlock } = props;
-  const { template = 'default' } = data;
+  const { variation } = props;
 
-  const Quote =
-    config.blocks.blocksConfig.quote.templates[template]?.view || (() => '');
-
-  React.useEffect(() => {
-    if (mode === 'edit' && !template) {
-      onChangeBlock(block, {
-        ...data,
-        template: 'default',
-      });
-    }
-    /* eslint-disable-next-line */
-  }, []);
-
+  const Quote = useMemo(() => variation?.view, [variation]);
   return <Quote {...props} />;
 };
 
-export default View;
+export default withBlockExtensions(View);

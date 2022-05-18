@@ -1,7 +1,7 @@
 import quoteSVG from '@plone/volto/icons/quote.svg';
 import QuoteEdit from './Edit';
 import QuoteView from './View';
-import PullquoteView from './templates/Pullquote/Pullquote';
+import QuoteVariations from './variations';
 
 export default (config) => {
   config.blocks.blocksConfig.quote = {
@@ -11,16 +11,7 @@ export default (config) => {
     group: 'text',
     edit: QuoteEdit,
     view: QuoteView,
-    templates: {
-      default: {
-        title: 'Quote',
-        view: PullquoteView,
-        icons: {
-          openQuote: 'quote left',
-          closeQuote: 'quote right',
-        },
-      },
-    },
+    variations: QuoteVariations,
     blockHasOwnFocusManagement: true,
     restricted: false,
     mostUsed: false,
