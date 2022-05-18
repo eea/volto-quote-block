@@ -21,5 +21,12 @@ export default (config) => {
       view: [],
     },
   };
+
+  // Footnotes
+  config.settings.blocksWithFootnotes = [
+    ...(config.settings.blocksWithFootnotes || []),
+    'quote',
+  ];
+
   return config;
 };
