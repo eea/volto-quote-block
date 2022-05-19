@@ -17,7 +17,8 @@
     "url": "git@github.com:eea/volto-quote-block.git"
   },
   "addons": [
-    "@eeacms/volto-object-widget"
+    "@eeacms/volto-object-widget",
+    "volto-slate"
   ],
   "dependencies": {
     "@plone/scripts": "*",
