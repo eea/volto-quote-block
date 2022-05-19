@@ -46,7 +46,7 @@ const Quote = (props) => {
     onFocusPreviousBlock,
     onSelectBlock,
   } = props;
-  const { value, source, sourceInfo, position = null, reversed = false } = data;
+  const { value, source, extra, position = null, reversed = false } = data;
   const floated = isFloated(position);
 
   const withBlockProperties = React.useCallback(
@@ -108,8 +108,8 @@ const Quote = (props) => {
           {reversed && source && (
             <Quote.Source>{serializeText(source)}</Quote.Source>
           )}
-          {reversed && sourceInfo && (
-            <Quote.SourceInfo>{serializeText(sourceInfo)}</Quote.SourceInfo>
+          {reversed && extra && (
+            <Quote.SourceInfo>{serializeText(extra)}</Quote.SourceInfo>
           )}
           {mode === 'edit' && !floated ? (
             <Quote.Quote icons={icons}>
@@ -139,8 +139,8 @@ const Quote = (props) => {
           {!reversed && source && (
             <Quote.Source>{serializeText(source)}</Quote.Source>
           )}
-          {!reversed && sourceInfo && (
-            <Quote.SourceInfo>{serializeText(sourceInfo)}</Quote.SourceInfo>
+          {!reversed && extra && (
+            <Quote.SourceInfo>{serializeText(extra)}</Quote.SourceInfo>
           )}
         </div>
       </blockquote>

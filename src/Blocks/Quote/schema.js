@@ -16,7 +16,7 @@ export default (props) => {
             ? ['value']
             : []),
           'source',
-          'sourceInfo',
+          'extra',
         ],
       },
     ],
@@ -34,8 +34,8 @@ export default (props) => {
         title: 'Source',
         widget: 'slate',
       },
-      sourceInfo: {
-        title: 'Source info',
+      extra: {
+        title: 'Extra info',
         widget: 'slate',
       },
     },

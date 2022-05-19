@@ -50,7 +50,7 @@ export default [
           ...schema.properties,
           title: {
             title: 'Title',
-            widget: 'slate_richtext',
+            widget: 'slate',
           },
           image: {
             title: 'Image',

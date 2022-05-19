@@ -51,7 +51,7 @@ const Testimonial = (props) => {
     onFocusPreviousBlock,
     onSelectBlock,
   } = props;
-  const { value, source, sourceInfo, image, title } = data;
+  const { value, source, extra, image, title } = data;
 
   const withBlockProperties = React.useCallback(
     (editor) => {
@@ -107,7 +107,7 @@ const Testimonial = (props) => {
                 : image || DefaultImageSVG
             }
             title={source}
-            description={sourceInfo}
+            description={extra}
           />
           <Testimonial.Content>
             {title && (
