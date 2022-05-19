@@ -23,10 +23,10 @@ export default (config) => {
   };
 
   // Footnotes
-  config.settings.blocksWithFootnotes = [
-    ...(config.settings.blocksWithFootnotes || []),
-    'quote',
-  ];
+  config.settings.blocksWithFootnotesSupport = {
+    ...(config.settings.blocksWithFootnotesSupport || {}),
+    quote: ['value', 'source', 'extra', 'title'],
+  };
 
   return config;
 };
