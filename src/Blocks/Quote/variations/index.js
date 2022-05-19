@@ -13,13 +13,17 @@ export default [
         ...schema,
         fieldsets: [
           ...schema.fieldsets,
-          { id: 'layout', title: 'Layout', fields: ['position'] },
+          { id: 'layout', title: 'Layout', fields: ['position', 'reversed'] },
         ],
         properties: {
           ...schema.properties,
           position: {
             title: 'Alignment',
             widget: 'align',
+          },
+          reversed: {
+            title: 'Reversed',
+            type: 'boolean',
           },
         },
       };

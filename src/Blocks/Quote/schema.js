@@ -15,7 +15,6 @@ export default (props) => {
           ...(position && ['left', 'right'].includes(position)
             ? ['value']
             : []),
-          'reversed',
           'source',
           'sourceInfo',
         ],
@@ -27,21 +26,17 @@ export default (props) => {
         choices: variations.map((extension) => [extension.id, extension.title]),
         defaultValue: 'default',
       },
-      reversed: {
-        title: 'Reversed',
-        type: 'boolean',
-      },
       value: {
         title: 'Quote',
-        widget: 'slate_richtext',
+        widget: 'slate',
       },
       source: {
         title: 'Source',
-        widget: 'slate_richtext',
+        widget: 'slate',
       },
       sourceInfo: {
         title: 'Source info',
-        widget: 'slate_richtext',
+        widget: 'slate',
       },
     },
     required: [],
