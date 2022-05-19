@@ -16,6 +16,7 @@ export default [
           { id: 'layout', title: 'Layout', fields: ['position'] },
         ],
         properties: {
+          ...schema.properties,
           position: {
             title: 'Alignment',
             widget: 'align',
