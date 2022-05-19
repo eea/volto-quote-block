@@ -7,6 +7,22 @@ export default [
     title: 'Quote (default)',
     view: DefaultQuote,
     isDefault: true,
+    schemaEnhancer: (props) => {
+      const { schema } = props;
+      return {
+        ...schema,
+        fieldsets: [
+          ...schema.fieldsets,
+          { id: 'layout', title: 'Layout', fields: ['position'] },
+        ],
+        properties: {
+          position: {
+            title: 'Alignment',
+            widget: 'align',
+          },
+        },
+      };
+    },
   },
   {
     id: 'testimonial',
@@ -33,7 +49,7 @@ export default [
           },
           image: {
             title: 'Image',
-            widget: 'object_browser',
+            widget: 'attachedimage',
             mode: 'image',
             return: 'single',
           },

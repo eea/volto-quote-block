@@ -1,8 +1,7 @@
 import React from 'react';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
+import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers';
 import SlateEditor from 'volto-slate/editor/SlateEditor';
 import { handleKey } from 'volto-slate/blocks/Text/keyboard';
 import {
@@ -11,13 +10,7 @@ import {
 } from '@eeacms/volto-quote-block/helpers';
 import Quote from './DefaultQuote';
 
-const getPath = (url = '') =>
-  (url || '').startsWith('http') ? new URL(url).pathname : url;
-
-const getScaleUrl = (url, size) =>
-  (url || '').includes(config.settings.apiPath)
-    ? `${flattenToAppURL(url.replace('/api', ''))}/@@images/image/${size}`
-    : `${url.replace('/api', '')}/@@images/image/${size}`;
+import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
 
 function Divider({ ...rest }) {
   return <div className="eea divider" {...rest}></div>;
@@ -109,7 +102,9 @@ const Testimonial = (props) => {
         <Grid>
           <Testimonial.Avatar
             src={
-              getScaleUrl(getPath(image?.['@id']), 'preview') || DefaultImageSVG
+              isInternalURL(image)
+                ? `${flattenToAppURL(image)}/@@images/image/preview`
+                : image || DefaultImageSVG
             }
             title={source}
             description={sourceInfo}

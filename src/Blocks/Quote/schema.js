@@ -16,7 +16,6 @@ export default (props) => {
             ? ['value']
             : []),
           'reversed',
-          'position',
           'source',
           'sourceInfo',
         ],
@@ -31,10 +30,6 @@ export default (props) => {
       reversed: {
         title: 'Reversed',
         type: 'boolean',
-      },
-      position: {
-        title: 'Alignment',
-        widget: 'align',
       },
       value: {
         title: 'Quote',
