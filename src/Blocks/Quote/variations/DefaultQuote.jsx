@@ -109,7 +109,7 @@ const Quote = (props) => {
             <Quote.Source>{serializeText(source)}</Quote.Source>
           )}
           {reversed && extra && (
-            <Quote.SourceInfo>{serializeText(extra)}</Quote.SourceInfo>
+            <Quote.Extra>{serializeText(extra)}</Quote.Extra>
           )}
           {mode === 'edit' && !floated ? (
             <Quote.Quote icons={icons}>
@@ -140,7 +140,7 @@ const Quote = (props) => {
             <Quote.Source>{serializeText(source)}</Quote.Source>
           )}
           {!reversed && extra && (
-            <Quote.SourceInfo>{serializeText(extra)}</Quote.SourceInfo>
+            <Quote.Extra>{serializeText(extra)}</Quote.Extra>
           )}
         </div>
       </blockquote>
@@ -168,7 +168,7 @@ Quote.Source = ({ children, ...rest }) => (
   </div>
 );
 
-Quote.SourceInfo = ({ children, ...rest }) => (
+Quote.Extra = ({ children, ...rest }) => (
   <div className="info" {...rest}>
     {children}
   </div>
