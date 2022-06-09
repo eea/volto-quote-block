@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
 import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers';
 import SlateEditor from 'volto-slate/editor/SlateEditor';
 import { handleKey } from 'volto-slate/blocks/Text/keyboard';
+import { uploadContent, saveSlateBlockSelection } from 'volto-slate/actions';
 import {
   createSlateParagraph,
   serializeText,
@@ -16,26 +18,6 @@ function Divider({ ...rest }) {
   return <div className="eea divider" {...rest}></div>;
 }
 
-const TestimonialWrapper = (props) => {
-  const { children, index, block, mode, handleKeyDown } = props;
-  return mode === 'edit' ? (
-    <div
-      role="presentation"
-      onKeyDown={(e) => {
-        handleKeyDown(e, index, block, props.blockNode.current);
-      }}
-      style={{ outline: 'none' }}
-      // The tabIndex is required for the keyboard navigation
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-      tabIndex={0}
-    >
-      {children}
-    </div>
-  ) : (
-    children
-  );
-};
-
 const Testimonial = (props) => {
   const { slate } = config.settings;
   const {
@@ -45,10 +27,7 @@ const Testimonial = (props) => {
     block,
     selected,
     properties,
-    onAddBlock,
     onChangeBlock,
-    onFocusNextBlock,
-    onFocusPreviousBlock,
     onSelectBlock,
   } = props;
   const { value, source, extra, image, title } = data;
@@ -67,82 +46,52 @@ const Testimonial = (props) => {
     }
   }, [onSelectBlock, selected, block]);
 
-  const handleKeyDown = React.useCallback(
-    (
-      e,
-      index,
-      block,
-      node,
-      {
-        disableEnter = false,
-        disableArrowUp = false,
-        disableArrowDown = false,
-      } = {},
-    ) => {
-      const isMultipleSelection = e.shiftKey;
-      if (e.key === 'ArrowUp' && !disableArrowUp) {
-        onFocusPreviousBlock(block, node, isMultipleSelection);
-        e.preventDefault();
-      }
-      if (e.key === 'ArrowDown' && !disableArrowDown) {
-        onFocusNextBlock(block, node, isMultipleSelection);
-        e.preventDefault();
-      }
-      if ((e.key === 'Return' || e.key === 'Enter') && !disableEnter) {
-        onAddBlock(config.settings.defaultBlockType, index + 1);
-      }
-    },
-    [onAddBlock, onFocusPreviousBlock, onFocusNextBlock],
-  );
-
   return (
-    <TestimonialWrapper {...props} handleKeyDown={handleKeyDown}>
-      <div className="eea testimonial">
-        <Divider />
-        <Grid>
-          <Testimonial.Avatar
-            src={
-              isInternalURL(image)
-                ? `${flattenToAppURL(image)}/@@images/image/preview`
-                : image || DefaultImageSVG
-            }
-            title={source}
-            description={extra}
-          />
-          <Testimonial.Content>
-            {title && (
-              <Testimonial.Title>{serializeText(title)}</Testimonial.Title>
-            )}
-            {mode === 'edit' ? (
-              <Testimonial.Quote>
-                <SlateEditor
-                  index={index}
-                  properties={properties}
-                  extensions={slate.textblockExtensions}
-                  renderExtensions={[withBlockProperties]}
-                  value={createSlateParagraph(value)}
-                  onChange={(value) => {
-                    onChangeBlock(block, {
-                      ...data,
-                      value,
-                    });
-                  }}
-                  block={block}
-                  onFocus={handleFocus}
-                  onKeyDown={handleKey}
-                  selected={selected}
-                  placeholder="Add quote"
-                  slateSettings={slate}
-                />
-              </Testimonial.Quote>
-            ) : (
-              <Testimonial.Quote>{serializeText(value)}</Testimonial.Quote>
-            )}
-          </Testimonial.Content>
-        </Grid>
-        <Divider />
-      </div>
-    </TestimonialWrapper>
+    <div className="eea testimonial">
+      <Divider />
+      <Grid>
+        <Testimonial.Avatar
+          src={
+            isInternalURL(image)
+              ? `${flattenToAppURL(image)}/@@images/image/preview`
+              : image || DefaultImageSVG
+          }
+          title={source}
+          description={extra}
+        />
+        <Testimonial.Content>
+          {title && (
+            <Testimonial.Title>{serializeText(title)}</Testimonial.Title>
+          )}
+          {mode === 'edit' ? (
+            <Testimonial.Quote>
+              <SlateEditor
+                index={index}
+                properties={properties}
+                extensions={slate.textblockExtensions}
+                renderExtensions={[withBlockProperties]}
+                value={createSlateParagraph(value)}
+                onChange={(value) => {
+                  onChangeBlock(block, {
+                    ...data,
+                    value,
+                  });
+                }}
+                block={block}
+                onFocus={handleFocus}
+                onKeyDown={handleKey}
+                selected={selected}
+                placeholder="Add quote"
+                slateSettings={slate}
+              />
+            </Testimonial.Quote>
+          ) : (
+            <Testimonial.Quote>{serializeText(value)}</Testimonial.Quote>
+          )}
+        </Testimonial.Content>
+      </Grid>
+      <Divider />
+    </div>
   );
 };
 
@@ -188,4 +137,19 @@ Testimonial.Quote = ({ children }) => (
   </blockquote>
 );
 
-export default Testimonial;
+export default connect(
+  (state, props) => {
+    const blockId = props.block;
+    return {
+      defaultSelection: blockId
+        ? state.slate_block_selections?.[blockId]
+        : null,
+      uploadRequest: state.upload_content?.[props.block]?.upload || {},
+      uploadedContent: state.upload_content?.[props.block]?.data || {},
+    };
+  },
+  {
+    uploadContent,
+    saveSlateBlockSelection, // needed as editor blockProps
+  },
+)(Testimonial);
