@@ -1,34 +1,16 @@
 import React from 'react';
 import cx from 'classnames';
+import { connect } from 'react-redux';
 import { Icon, Message } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
 import SlateEditor from 'volto-slate/editor/SlateEditor';
 import { handleKey } from 'volto-slate/blocks/Text/keyboard';
+import { uploadContent, saveSlateBlockSelection } from 'volto-slate/actions';
 import {
   createSlateParagraph,
   isFloated,
   serializeText,
 } from '@eeacms/volto-quote-block/helpers';
-
-const QuoteWrapper = (props) => {
-  const { children, index, block, mode, handleKeyDown } = props;
-  return mode === 'edit' ? (
-    <div
-      role="presentation"
-      onKeyDown={(e) => {
-        handleKeyDown(e, index, block, props.blockNode.current);
-      }}
-      style={{ outline: 'none' }}
-      // The tabIndex is required for the keyboard navigation
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-      tabIndex={0}
-    >
-      {children}
-    </div>
-  ) : (
-    children
-  );
-};
 
 const Quote = (props) => {
   const { slate } = config.settings;
@@ -40,10 +22,7 @@ const Quote = (props) => {
     block,
     selected,
     properties,
-    onAddBlock,
     onChangeBlock,
-    onFocusNextBlock,
-    onFocusPreviousBlock,
     onSelectBlock,
   } = props;
   const { value, source, extra, position = null, reversed = false } = data;
@@ -63,37 +42,8 @@ const Quote = (props) => {
     }
   }, [onSelectBlock, selected, block]);
 
-  const handleKeyDown = React.useCallback(
-    (
-      e,
-      index,
-      block,
-      node,
-      {
-        disableEnter = false,
-        disableArrowUp = false,
-        disableArrowDown = false,
-      } = {},
-    ) => {
-      if (mode === 'edit' && !floated) return;
-      const isMultipleSelection = e.shiftKey;
-      if (e.key === 'ArrowUp' && !disableArrowUp) {
-        onFocusPreviousBlock(block, node, isMultipleSelection);
-        e.preventDefault();
-      }
-      if (e.key === 'ArrowDown' && !disableArrowDown) {
-        onFocusNextBlock(block, node, isMultipleSelection);
-        e.preventDefault();
-      }
-      if ((e.key === 'Return' || e.key === 'Enter') && !disableEnter) {
-        onAddBlock(config.settings.defaultBlockType, index + 1);
-      }
-    },
-    [onAddBlock, onFocusPreviousBlock, onFocusNextBlock, mode, floated],
-  );
-
   return (
-    <QuoteWrapper {...props} handleKeyDown={handleKeyDown}>
+    <>
       {mode === 'edit' && floated && (
         <Message color="teal">
           <Message.Header>Click here to edit quote.</Message.Header>
@@ -144,7 +94,7 @@ const Quote = (props) => {
           )}
         </div>
       </blockquote>
-    </QuoteWrapper>
+    </>
   );
 };
 
@@ -174,4 +124,19 @@ Quote.Extra = ({ children, ...rest }) => (
   </div>
 );
 
-export default Quote;
+export default connect(
+  (state, props) => {
+    const blockId = props.block;
+    return {
+      defaultSelection: blockId
+        ? state.slate_block_selections?.[blockId]
+        : null,
+      uploadRequest: state.upload_content?.[props.block]?.upload || {},
+      uploadedContent: state.upload_content?.[props.block]?.data || {},
+    };
+  },
+  {
+    uploadContent,
+    saveSlateBlockSelection, // needed as editor blockProps
+  },
+)(Quote);
