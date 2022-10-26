@@ -3,9 +3,12 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import { Icon, Message } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import SlateEditor from 'volto-slate/editor/SlateEditor';
-import { handleKey } from 'volto-slate/blocks/Text/keyboard';
-import { uploadContent, saveSlateBlockSelection } from 'volto-slate/actions';
+import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
+import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
+import {
+  uploadContent,
+  saveSlateBlockSelection,
+} from '@plone/volto-slate/actions';
 import {
   createSlateParagraph,
   isFloated,
