@@ -5,7 +5,10 @@ import config from '@plone/volto/registry';
 import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
-import { uploadContent, saveSlateBlockSelection } from '@plone/volto-slate/actions';
+import {
+  uploadContent,
+  saveSlateBlockSelection,
+} from '@plone/volto-slate/actions';
 import {
   createSlateParagraph,
   serializeText,
