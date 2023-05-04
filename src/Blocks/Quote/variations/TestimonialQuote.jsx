@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers';
+import { isInternalURL } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
@@ -14,7 +14,7 @@ import {
   serializeText,
 } from '@eeacms/volto-quote-block/helpers';
 import Quote from './DefaultQuote';
-
+import { getFieldURL } from '@eeacms/volto-quote-block/helpers';
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
 
 function Divider({ ...rest }) {
@@ -56,7 +56,7 @@ const Testimonial = (props) => {
         <Testimonial.Avatar
           src={
             isInternalURL(image)
-              ? `${flattenToAppURL(image)}/@@images/image/preview`
+              ? `${getFieldURL(image)}/@@images/image/preview`
               : image || DefaultImageSVG
           }
           title={source}
