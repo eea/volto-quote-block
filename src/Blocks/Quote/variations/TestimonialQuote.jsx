@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { isInternalURL } from '@plone/volto/helpers';
+import { isInternalURL, flattenToAppURL } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
@@ -33,7 +33,8 @@ const Testimonial = (props) => {
     onChangeBlock,
     onSelectBlock,
   } = props;
-  const { value, source, extra, image, title } = data;
+  const { value, source, extra, title } = data;
+  const image = getFieldURL(data.image);
 
   const withBlockProperties = React.useCallback(
     (editor) => {
@@ -56,7 +57,7 @@ const Testimonial = (props) => {
         <Testimonial.Avatar
           src={
             isInternalURL(image)
-              ? `${getFieldURL(image)}/@@images/image/preview`
+              ? `${flattenToAppURL(image)}/@@images/image/preview`
               : image || DefaultImageSVG
           }
           title={source}
