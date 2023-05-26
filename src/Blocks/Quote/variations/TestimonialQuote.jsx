@@ -13,8 +13,9 @@ import {
   createSlateParagraph,
   serializeText,
 } from '@eeacms/volto-quote-block/helpers';
-import Quote from './DefaultQuote';
 import { getFieldURL } from '@eeacms/volto-quote-block/helpers';
+import Quote from './DefaultQuote';
+
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
 
 function Divider({ ...rest }) {
