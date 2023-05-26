@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers';
+import { isInternalURL, flattenToAppURL } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
@@ -13,6 +13,7 @@ import {
   createSlateParagraph,
   serializeText,
 } from '@eeacms/volto-quote-block/helpers';
+import { getFieldURL } from '@eeacms/volto-quote-block/helpers';
 import Quote from './DefaultQuote';
 
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
@@ -33,7 +34,8 @@ const Testimonial = (props) => {
     onChangeBlock,
     onSelectBlock,
   } = props;
-  const { value, source, extra, image, title } = data;
+  const { value, source, extra, title } = data;
+  const image = getFieldURL(data.image);
 
   const withBlockProperties = React.useCallback(
     (editor) => {
