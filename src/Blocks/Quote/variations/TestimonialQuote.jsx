@@ -12,8 +12,8 @@ import {
 import {
   createSlateParagraph,
   serializeText,
+  getFieldURL,
 } from '@eeacms/volto-quote-block/helpers';
-import { getFieldURL } from '@eeacms/volto-quote-block/helpers';
 import Quote from './DefaultQuote';
 
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
