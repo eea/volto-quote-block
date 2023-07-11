@@ -19,7 +19,7 @@
 
 ## Features
 
-Demo GIF
+![Quote Block](https://github.com/eea/volto-quote-block/raw/docs/docs/volto-quote.gif)
 
 ## Getting started
 
