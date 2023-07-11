@@ -56,6 +56,8 @@ const Testimonial = (props) => {
       <Grid>
         <Testimonial.Avatar
           src={image?.download || DefaultImageSVG}
+          width={image?.width || '100%'}
+          height={image?.height || 'auto'}
           title={source}
           description={extra}
         />
@@ -95,13 +97,20 @@ const Testimonial = (props) => {
   );
 };
 
-Testimonial.Avatar = ({ children, ...rest }) => {
+Testimonial.Avatar = ({ width, height, children, ...rest }) => {
   const { title, description } = rest;
   return (
     <Grid.Column mobile={12} tablet={3} computer={2}>
       <div className="avatar-wrapper">
         <Card className={`eea rounded small`} fluid={rest.fluid}>
-          <Image src={rest.src} wrapped ui={false} alt="card image" />
+          <Image
+            src={rest.src}
+            wrapped
+            ui={false}
+            alt="card image"
+            width={width}
+            height={height}
+          />
           {title || description ? (
             <Card.Content>
               {title && <Card.Header>{serializeText(title)}</Card.Header>}
