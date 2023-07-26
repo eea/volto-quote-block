@@ -14,12 +14,11 @@
 [![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-quote-block-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-quote-block-develop)
 [![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-quote-block-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-quote-block-develop)
 
-
 [Volto](https://github.com/plone/volto) add-on
 
 ## Features
 
-![Quote Block](https://github.com/eea/volto-quote-block/raw/docs/docs/volto-quote.gif)
+![Quote Block](https://github.com/eea/volto-quote-block/raw/develop/docs/volto-quote-block.gif)
 
 ## Getting started
 
@@ -33,6 +32,7 @@
    ```
 
 1. Start Plone backend
+
    ```
    docker run -d --name plone -p 8080:8080 -e SITE=Plone -e PROFILES="profile-plone.restapi:blocks" plone
    ```
@@ -51,25 +51,25 @@
 
 1. Start Volto frontend
 
-* If you already have a volto project, just update `package.json`:
+- If you already have a volto project, just update `package.json`:
 
-   ```JSON
-   "addons": [
-       "@eeacms/volto-quote-block"
-   ],
+  ```JSON
+  "addons": [
+      "@eeacms/volto-quote-block"
+  ],
 
-   "dependencies": {
-       "@eeacms/volto-quote-block": "^1.0.0"
-   }
-   ```
+  "dependencies": {
+      "@eeacms/volto-quote-block": "^1.0.0"
+  }
+  ```
 
-* If not, create one:
+- If not, create one:
 
-   ```
-   npm install -g yo @plone/generator-volto
-   yo @plone/volto my-volto-project --addon @eeacms/volto-quote-block
-   cd my-volto-project
-   ```
+  ```
+  npm install -g yo @plone/generator-volto
+  yo @plone/volto my-volto-project --addon @eeacms/volto-quote-block
+  cd my-volto-project
+  ```
 
 1. Install new add-ons and restart Volto:
 
@@ -105,4 +105,3 @@ See [LICENSE.md](https://github.com/eea/volto-quote-block/blob/master/LICENSE.md
 ## Funding
 
 [European Environment Agency (EU)](http://eea.europa.eu)
-
