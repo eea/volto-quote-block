@@ -18,7 +18,7 @@
 
 ## Features
 
-![Quote Block](./docs/volto-quote-block.gif)
+![Quote Block](https://raw.githubusercontent.com/eea/volto-quote-block/master/docs/volto-quote-block.gif)
 
 ## Getting started
 
