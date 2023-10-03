@@ -90,8 +90,3 @@ See [LICENSE.md](https://github.com/eea/volto-quote-block/blob/master/LICENSE.md
 ## Funding
 
 [European Environment Agency (EU)](http://eea.europa.eu)
-/LICENSE.md) for details.
-
-## Funding
-
-[European Environment Agency (EU)](http://eea.europa.eu)
