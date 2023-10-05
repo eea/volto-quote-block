@@ -43,12 +43,12 @@ describe('ControlPanel: Dexterity Content-Types Layout', () => {
     cy.get('.ui.basic.icon.button.block-add-button:visible').click();
     cy.get('.blocks-chooser .title').contains('Text').click();
     cy.get('.content.active.text .button.quote')
-    .contains('Quote')
-    .click({ force: true });
-    cy.get('.form .react-select__value-container .react-select__single-value:nth(1)').click();
+      .contains('Quote')
+      .click({ force: true });
+    cy.get('#sidebar .formtabs').contains('Block').click();
+    cy.get('.form .react-select-container').click();
     cy.get('.react-select__menu').contains('Testimonial quote').click();
 
-    
     cy.get('#toolbar-save').click();
 
     cy.visit('/cypress');
@@ -67,9 +67,17 @@ describe('ControlPanel: Dexterity Content-Types Layout', () => {
     cy.getSlateTitle().type('My First Book');
     cy.get('.documentFirstHeading').contains('My First Book');
 
-    cy.get('.block-editor-quote .default div[role="textbox"]').click().type('My default quote');
-    cy.get('.block-editor-quote .testimonial div[role="textbox"]').click().type('My testimonial quote');
-    cy.get('.form .field-wrapper-image .input input').click().type('https://eea.github.io/volto-eea-design-system/img/eea_icon.png{enter}');
+    cy.get('.block.quote:nth(1) div[role="textbox"]')
+      .click()
+      .type('My default quote');
+    cy.get('.block.quote:nth(2) div[role="textbox"]')
+      .click()
+      .type('My testimonial quote');
+    cy.get('.form .field-wrapper-image .input input')
+      .click()
+      .type(
+        'https://eea.github.io/volto-eea-design-system/img/eea_icon.png{enter}',
+      );
     cy.get('.form .field-wrapper-image .buttons .primary .icon').click();
 
     cy.get('#toolbar-save').click();
