@@ -14,40 +14,30 @@
 [![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-quote-block-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-quote-block-develop)
 [![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-quote-block-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-quote-block-develop)
 
-
 [Volto](https://github.com/plone/volto) add-on
 
 ## Features
 
-![Quote Block](https://github.com/eea/volto-quote-block/raw/docs/docs/volto-quote.gif)
+![Quote Block](https://raw.githubusercontent.com/eea/volto-quote-block/master/docs/volto-quote-block.gif)
 
 ## Getting started
 
 ### Try volto-quote-block with Docker
 
-1. Get the latest Docker images
+      git clone https://github.com/eea/volto-quote-block.git
+      cd volto-quote-block
+      make
+      make start
 
-   ```
-   docker pull plone
-   docker pull plone/volto
-   ```
-
-1. Start Plone backend
-   ```
-   docker run -d --name plone -p 8080:8080 -e SITE=Plone -e PROFILES="profile-plone.restapi:blocks" plone
-   ```
-
-1. Start Volto frontend
-
-   ```
-   docker run -it --rm -p 3000:3000 --link plone -e ADDONS="@eeacms/volto-quote-block" plone/volto
-   ```
-
-1. Go to http://localhost:3000
+Go to http://localhost:3000
 
 ### Add volto-quote-block to your Volto project
 
 1. Make sure you have a [Plone backend](https://plone.org/download) up-and-running at http://localhost:8080/Plone
+
+   ```Bash
+   docker compose up backend
+   ```
 
 1. Start Volto frontend
 
@@ -59,7 +49,7 @@
    ],
 
    "dependencies": {
-       "@eeacms/volto-quote-block": "^1.0.0"
+       "@eeacms/volto-quote-block": "*"
    }
    ```
 
@@ -67,7 +57,7 @@
 
    ```
    npm install -g yo @plone/generator-volto
-   yo @plone/volto my-volto-project --addon @eeacms/volto-quote-block
+   yo @plone/volto my-volto-project --canary --addon @eeacms/volto-quote-block
    cd my-volto-project
    ```
 
@@ -100,9 +90,3 @@ See [LICENSE.md](https://github.com/eea/volto-quote-block/blob/master/LICENSE.md
 ## Funding
 
 [European Environment Agency (EU)](http://eea.europa.eu)
-/LICENSE.md) for details.
-
-## Funding
-
-[European Environment Agency (EU)](http://eea.europa.eu)
-
