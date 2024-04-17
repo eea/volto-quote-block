@@ -1,6 +1,7 @@
 import DefaultQuote from './DefaultQuote';
 import TestimonialQuote from './TestimonialQuote';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default [
   {
     id: 'default',
