@@ -15,7 +15,7 @@ config.settings = {
   },
 };
 
-jest.mock('@plone/volto/helpers', () => ({
+jest.mock('@plone/volto/helpers/Url/Url', () => ({
   flattenToAppURL: jest.fn((url) => url),
   isInternalURL: jest.fn((url) => url),
 }));
