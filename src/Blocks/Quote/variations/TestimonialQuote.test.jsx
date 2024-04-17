@@ -26,11 +26,20 @@ jest.mock('@plone/volto-slate/editor/SlateEditor', () => {
       data-testid="mockedSlateEditor"
       placeholder={placeholder}
       onChange={onChange}
-      onKeyDown={onKeyDown}
+      onKeyDown={(event) => {
+        const mockHandleKey = jest.fn();
+        if (onKeyDown) {
+          onKeyDown(event, mockHandleKey);
+        }
+      }}
       onFocus={onFocus}
     />
   );
 });
+
+jest.mock('@plone/volto-slate/blocks/Text/keyboard', () => ({
+  handleKey: jest.fn(),
+}));
 
 describe('TestimonialQuote component', () => {
   let store;
