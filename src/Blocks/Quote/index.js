@@ -3,8 +3,7 @@ import QuoteEdit from './Edit';
 import QuoteView from './View';
 import QuoteVariations from './variations';
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (config) => {
+const config = (config) => {
   config.blocks.blocksConfig.quote = {
     id: 'quote',
     title: 'Quote',
@@ -31,3 +30,5 @@ export default (config) => {
 
   return config;
 };
+
+export default config;

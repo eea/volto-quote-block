@@ -2,7 +2,7 @@ import DefaultQuote from './DefaultQuote';
 import TestimonialQuote from './TestimonialQuote';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [
+const variations = [
   {
     id: 'default',
     title: 'Quote (default)',
@@ -64,3 +64,5 @@ export default [
     },
   },
 ];
+
+export default variations;
