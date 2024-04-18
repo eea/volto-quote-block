@@ -1,7 +1,6 @@
 import DefaultQuote from './DefaultQuote';
 import TestimonialQuote from './TestimonialQuote';
 
-// eslint-disable-next-line import/no-anonymous-default-export
 const variations = [
   {
     id: 'default',
