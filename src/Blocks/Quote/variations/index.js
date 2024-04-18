@@ -1,7 +1,7 @@
 import DefaultQuote from './DefaultQuote';
 import TestimonialQuote from './TestimonialQuote';
 
-export default [
+const variations = [
   {
     id: 'default',
     title: 'Quote (default)',
@@ -63,3 +63,5 @@ export default [
     },
   },
 ];
+
+export default variations;
