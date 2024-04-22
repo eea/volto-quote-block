@@ -3,7 +3,7 @@ import QuoteEdit from './Edit';
 import QuoteView from './View';
 import QuoteVariations from './variations';
 
-export default (config) => {
+const applyConfig = (config) => {
   config.blocks.blocksConfig.quote = {
     id: 'quote',
     title: 'Quote',
@@ -30,3 +30,5 @@ export default (config) => {
 
   return config;
 };
+
+export default applyConfig;
