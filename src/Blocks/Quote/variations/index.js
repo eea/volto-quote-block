@@ -57,6 +57,7 @@ const variations = [
             widget: 'attachedimage',
             mode: 'image',
             return: 'single',
+            selectedItemAttrs: ['image_field', 'image_scales', '@type'],
           },
         },
       };
