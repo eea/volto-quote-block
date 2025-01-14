@@ -54,7 +54,7 @@ msgstr "Bild"
 
 #. Default: "Quote"
 #: Blocks/Quote/schema
-msgid "quoteTitle"
+msgid "Quote"
 msgstr "Zitat"
 
 #. Default: "Reversed"
