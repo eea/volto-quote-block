@@ -1,4 +1,10 @@
 import myExportedArray from './index';
+import { createIntl } from 'react-intl';
+
+const intl = createIntl({
+  locale: 'en',
+  messages: {},
+});
 
 describe('My exported array', () => {
   it('should have the correct properties', () => {
@@ -19,6 +25,7 @@ describe('My exported array', () => {
         fieldsets: [],
         properties: {},
       },
+      intl,
     };
     const enhancedSchema = defaultQuote.schemaEnhancer(mockProps);
     expect(enhancedSchema).toHaveProperty('fieldsets');
@@ -35,6 +42,7 @@ describe('My exported array', () => {
         fieldsets: [],
         properties: {},
       },
+      intl,
     };
     const enhancedSchema = testimonialQuote.schemaEnhancer(mockProps);
     expect(enhancedSchema).toHaveProperty('fieldsets');

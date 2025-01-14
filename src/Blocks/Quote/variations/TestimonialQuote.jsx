@@ -17,14 +17,14 @@ import {
 import Quote from './DefaultQuote';
 
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
-import { defineMessages } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
   addQuote: {
     id: 'addQuote',
-    defaultMessage: 'Add quote'
+    defaultMessage: 'Add quote',
   },
-})
+});
 
 function Divider({ ...rest }) {
   return <div className="eea divider" {...rest}></div>;
@@ -41,7 +41,7 @@ const Testimonial = (props) => {
     properties,
     onChangeBlock,
     onSelectBlock,
-    intl
+    intl,
   } = props;
   const { value, source, extra, title } = data;
   const image = getFieldURL(data.image);
@@ -166,4 +166,4 @@ export default connect(
     uploadContent,
     saveSlateBlockSelection, // needed as editor blockProps
   },
-)(Testimonial);
+)(injectIntl(Testimonial));

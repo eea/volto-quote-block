@@ -14,18 +14,18 @@ import {
   isFloated,
   serializeText,
 } from '@eeacms/volto-quote-block/helpers';
-import { defineMessages } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
   editQuote: {
     id: 'editQuote',
-    defaultMessage: 'Click here to edit quote.'
+    defaultMessage: 'Click here to edit quote.',
   },
   addQuote: {
     id: 'addQuote',
-    defaultMessage: 'Add quote'
+    defaultMessage: 'Add quote',
   },
-})
+});
 
 const Quote = (props) => {
   const { slate } = config.settings;
@@ -39,7 +39,7 @@ const Quote = (props) => {
     properties,
     onChangeBlock,
     onSelectBlock,
-    intl
+    intl,
   } = props;
   const { value, source, extra, position = null, reversed = false } = data;
   const floated = isFloated(position);
@@ -62,7 +62,9 @@ const Quote = (props) => {
     <>
       {mode === 'edit' && floated && (
         <Message color="teal">
-          <Message.Header>{intl.formatMessage(messages.editQuote)}</Message.Header>
+          <Message.Header>
+            {intl.formatMessage(messages.editQuote)}
+          </Message.Header>
         </Message>
       )}
       <blockquote
@@ -155,4 +157,4 @@ export default connect(
     uploadContent,
     saveSlateBlockSelection, // needed as editor blockProps
   },
-)(Quote);
+)(injectIntl(Quote));
