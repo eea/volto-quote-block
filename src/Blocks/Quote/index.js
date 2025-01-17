@@ -13,7 +13,7 @@ defineMessages({
     id: 'Quote (default)',
     defaultMessage: 'Quote (default)',
   },
-})
+});
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.quote = {

@@ -21,8 +21,8 @@ const messages = defineMessages({
   extraInfo: {
     id: 'extraInfo',
     defaultMessage: 'Extra info',
-  }
-})
+  },
+});
 
 const schema = (props) => {
   const { position } = props.data;

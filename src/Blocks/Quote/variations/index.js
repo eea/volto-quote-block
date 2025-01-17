@@ -22,8 +22,8 @@ const messages = defineMessages({
   image: {
     id: 'image',
     defaultMessage: 'Image',
-  }
-})
+  },
+});
 
 const variations = [
   {
