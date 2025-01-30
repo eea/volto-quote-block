@@ -2,6 +2,18 @@ import quoteSVG from '@plone/volto/icons/quote.svg';
 import QuoteEdit from './Edit';
 import QuoteView from './View';
 import QuoteVariations from './variations';
+import { defineMessages } from 'react-intl';
+
+defineMessages({
+  testimonialVariation: {
+    id: 'Testimonial quote',
+    defaultMessage: 'Testimonial quote',
+  },
+  quoteVariation: {
+    id: 'Quote (default)',
+    defaultMessage: 'Quote (default)',
+  },
+});
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.quote = {
