@@ -4,6 +4,7 @@ import View from './View';
 import getSchema from './schema';
 
 import './styles.less';
+import { injectIntl } from 'react-intl';
 
 const Edit = (props) => {
   const { data = {}, block = null, selected = false, onChangeBlock } = props;
@@ -32,4 +33,4 @@ const Edit = (props) => {
   );
 };
 
-export default Edit;
+export default injectIntl(Edit);

@@ -11,4 +11,73 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Quote (default)"
+#: Blocks/Quote/index
+msgid "Quote (default)"
+msgstr ""
 
+#. Default: "Testimonial quote"
+#: Blocks/Quote/index
+msgid "Testimonial quote"
+msgstr ""
+
+#. Default: "Add quote"
+#: Blocks/Quote/variations/DefaultQuote
+#: Blocks/Quote/variations/TestimonialQuote
+msgid "addQuote"
+msgstr ""
+
+#. Default: "Alignment"
+#: Blocks/Quote/variations/index
+msgid "alignment"
+msgstr ""
+
+#. Default: "Default"
+#: Blocks/Quote/schema
+msgid "default"
+msgstr ""
+
+#. Default: "Click here to edit quote."
+#: Blocks/Quote/variations/DefaultQuote
+msgid "editQuote"
+msgstr ""
+
+#. Default: "Extra info"
+#: Blocks/Quote/schema
+msgid "extraInfo"
+msgstr ""
+
+#. Default: "Image"
+#: Blocks/Quote/variations/index
+msgid "image"
+msgstr ""
+
+#. Default: "Quote"
+#: Blocks/Quote/schema
+msgid "Quote"
+msgstr ""
+
+#. Default: "Reversed"
+#: Blocks/Quote/variations/index
+msgid "reversed"
+msgstr ""
+
+#. Default: "Source"
+#: Blocks/Quote/schema
+msgid "source"
+msgstr ""
+
+#. Default: "Testimonial"
+#: Blocks/Quote/variations/index
+msgid "testimonial"
+msgstr ""
+
+#. Default: "Title"
+#: Blocks/Quote/variations/index
+msgid "testimonialTitle"
+msgstr ""
+
+#. Default: "Variation"
+#: Blocks/Quote/schema
+msgid "variation"
+msgstr ""
