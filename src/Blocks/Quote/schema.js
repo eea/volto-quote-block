@@ -1,6 +1,6 @@
 import config from '@plone/volto/registry';
 
-export default (props) => {
+const schema = (props) => {
   const { position } = props.data;
   const variations = config.blocks.blocksConfig.quote.variations;
 
@@ -42,3 +42,5 @@ export default (props) => {
     required: [],
   };
 };
+
+export default schema;
