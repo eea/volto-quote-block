@@ -11,8 +11,8 @@ import {
 import {
   createSlateParagraph,
   serializeText,
-  getImageScaleParams,
 } from '@eeacms/volto-quote-block/helpers';
+import { getImageScaleParams } from '@eeacms/volto-object-widget/helpers';
 import Quote from './DefaultQuote';
 
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
