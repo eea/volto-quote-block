@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
@@ -29,7 +30,7 @@ function Divider({ ...rest }) {
   return <div className="eea divider" {...rest}></div>;
 }
 
-const Testimonial = (props) => {
+const Testimonial = React.memo((props) => {
   const { slate } = config.settings;
   const {
     data,
@@ -43,7 +44,10 @@ const Testimonial = (props) => {
     intl,
   } = props;
   const { value, source, extra, title } = data;
-  const image = getImageScaleParams(data.image, 'preview');
+  const image = React.useMemo(
+    () => getImageScaleParams(data.image, 'preview'),
+    [data.image],
+  );
 
   const withBlockProperties = React.useCallback(
     (editor) => {
@@ -58,6 +62,20 @@ const Testimonial = (props) => {
       onSelectBlock(block);
     }
   }, [onSelectBlock, selected, block]);
+
+  const handleSlateChange = React.useCallback(
+    (newValue) => {
+      ReactDOM.unstable_batchedUpdates(() => {
+        onChangeBlock(block, {
+          ...data,
+          value: newValue,
+        });
+      });
+    },
+    [onChangeBlock, block, data],
+  );
+
+  const slateValue = React.useMemo(() => createSlateParagraph(value), [value]);
 
   return (
     <div className="eea testimonial">
@@ -81,13 +99,8 @@ const Testimonial = (props) => {
                 properties={properties}
                 extensions={slate.textblockExtensions}
                 renderExtensions={[withBlockProperties]}
-                value={createSlateParagraph(value)}
-                onChange={(value) => {
-                  onChangeBlock(block, {
-                    ...data,
-                    value,
-                  });
-                }}
+                value={slateValue}
+                onChange={handleSlateChange}
                 block={block}
                 onFocus={handleFocus}
                 onKeyDown={handleKey}
@@ -104,7 +117,7 @@ const Testimonial = (props) => {
       <Divider />
     </div>
   );
-};
+});
 
 Testimonial.Avatar = ({ width, height, children, ...rest }) => {
   const { title, description } = rest;
@@ -116,7 +129,7 @@ Testimonial.Avatar = ({ width, height, children, ...rest }) => {
             src={rest.src}
             wrapped
             ui={false}
-            alt="card image"
+            alt=""
             width={width}
             height={height}
           />

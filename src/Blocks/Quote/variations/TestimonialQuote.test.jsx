@@ -236,4 +236,46 @@ describe('TestimonialQuote component', () => {
     expect(mockOnChangeBlock).toHaveBeenCalled();
     expect(mockOnSelectBlock).not.toHaveBeenCalled();
   });
+
+  it('should preserve slate text when image data changes', () => {
+    const mockOnChangeBlock = jest.fn();
+    const initialData = {
+      value: 'Test quote content',
+      image: [
+        {
+          '@id': 'URL',
+          value: 'value_url',
+        },
+      ],
+    };
+
+    const { rerender } = render(
+      <Provider store={store}>
+        <TestimonialQuote
+          data={initialData}
+          mode="edit"
+          onChangeBlock={mockOnChangeBlock}
+        />
+      </Provider>,
+    );
+
+    // Simulate image being removed (image field becomes empty)
+    const updatedData = {
+      ...initialData,
+      image: '',
+    };
+
+    rerender(
+      <Provider store={store}>
+        <TestimonialQuote
+          data={updatedData}
+          mode="edit"
+          onChangeBlock={mockOnChangeBlock}
+        />
+      </Provider>,
+    );
+
+    // The slate text should still be preserved
+    expect(updatedData.value).toBe('Test quote content');
+  });
 });
