@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import Quote from './DefaultQuote';
 import '@testing-library/jest-dom/extend-expect';
+import { IntlProvider } from 'react-intl';
 
 const mockStore = configureStore([]);
 
@@ -32,7 +33,7 @@ describe('Quote', () => {
   });
 
   it('renders the Quote component', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithIntl(
       <Provider store={store}>
         <Quote
           data={{
@@ -56,7 +57,7 @@ describe('Quote', () => {
   });
 
   it('renders the Quote component with reversed and no block', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithIntl(
       <Provider store={store}>
         <Quote
           data={{
@@ -80,3 +81,11 @@ describe('Quote', () => {
     expect(getByText('Test extra')).toBeInTheDocument();
   });
 });
+
+const renderWithIntl = (ui, { locale = 'en', messages = {} } = {}) => {
+  return render(
+    <IntlProvider locale={locale} messages={messages}>
+      {ui}
+    </IntlProvider>,
+  );
+};

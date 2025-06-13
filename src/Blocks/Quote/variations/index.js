@@ -1,14 +1,38 @@
 import DefaultQuote from './DefaultQuote';
 import TestimonialQuote from './TestimonialQuote';
+import { defineMessages } from 'react-intl';
 
-export default [
+const messages = defineMessages({
+  alignment: {
+    id: 'alignment',
+    defaultMessage: 'Alignment',
+  },
+  reversed: {
+    id: 'reversed',
+    defaultMessage: 'Reversed',
+  },
+  testimonial: {
+    id: 'testimonial',
+    defaultMessage: 'Testimonial',
+  },
+  testimonialTitle: {
+    id: 'testimonialTitle',
+    defaultMessage: 'Title',
+  },
+  image: {
+    id: 'image',
+    defaultMessage: 'Image',
+  },
+});
+
+const variations = [
   {
     id: 'default',
     title: 'Quote (default)',
     view: DefaultQuote,
     isDefault: true,
     schemaEnhancer: (props) => {
-      const { schema } = props;
+      const { schema, intl } = props;
       return {
         ...schema,
         fieldsets: [
@@ -18,11 +42,11 @@ export default [
         properties: {
           ...schema.properties,
           position: {
-            title: 'Alignment',
+            title: intl.formatMessage(messages.alignment),
             widget: 'align',
           },
           reversed: {
-            title: 'Reversed',
+            title: intl.formatMessage(messages.reversed),
             type: 'boolean',
           },
         },
@@ -35,25 +59,25 @@ export default [
     view: TestimonialQuote,
     isDefault: true,
     schemaEnhancer: (props) => {
-      const { schema } = props;
+      const { schema, intl } = props;
       return {
         ...schema,
         fieldsets: [
           ...schema.fieldsets,
           {
             id: 'testimonial',
-            title: 'Testimonial',
+            title: intl.formatMessage(messages.testimonial),
             fields: ['title', 'image'],
           },
         ],
         properties: {
           ...schema.properties,
           title: {
-            title: 'Title',
+            title: intl.formatMessage(messages.testimonialTitle),
             widget: 'slate',
           },
           image: {
-            title: 'Image',
+            title: intl.formatMessage(messages.image),
             widget: 'attachedimage',
             mode: 'image',
             return: 'single',
@@ -64,3 +88,5 @@ export default [
     },
   },
 ];
+
+export default variations;

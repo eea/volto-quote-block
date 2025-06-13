@@ -16,6 +16,14 @@ import { getImageScaleParams } from '@eeacms/volto-object-widget/helpers';
 import Quote from './DefaultQuote';
 
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
+import { defineMessages, injectIntl } from 'react-intl';
+
+const messages = defineMessages({
+  addQuote: {
+    id: 'addQuote',
+    defaultMessage: 'Add quote',
+  },
+});
 
 function Divider({ ...rest }) {
   return <div className="eea divider" {...rest}></div>;
@@ -32,6 +40,7 @@ const Testimonial = (props) => {
     properties,
     onChangeBlock,
     onSelectBlock,
+    intl,
   } = props;
   const { value, source, extra, title } = data;
   const image = getImageScaleParams(data.image, 'preview');
@@ -83,7 +92,7 @@ const Testimonial = (props) => {
                 onFocus={handleFocus}
                 onKeyDown={handleKey}
                 selected={selected}
-                placeholder="Add quote"
+                placeholder={intl.formatMessage(messages.addQuote)}
                 slateSettings={slate}
               />
             </Testimonial.Quote>
@@ -161,4 +170,4 @@ export default connect(
     uploadContent,
     saveSlateBlockSelection, // needed as editor blockProps
   },
-)(Testimonial);
+)(injectIntl(Testimonial));
