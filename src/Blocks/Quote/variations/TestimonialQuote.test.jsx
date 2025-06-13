@@ -18,6 +18,14 @@ config.settings = {
 jest.mock('@plone/volto/helpers/Url/Url', () => ({
   flattenToAppURL: jest.fn((url) => url),
   isInternalURL: jest.fn((url) => url),
+  getFieldURL: jest.fn((data) => {
+    if (Array.isArray(data)) {
+      return data.map(
+        (item) => item.value || item.url || item.href || item['@id'] || item,
+      );
+    }
+    return data?.value || data?.url || data?.href || data?.['@id'] || data;
+  }),
 }));
 
 jest.mock('@plone/volto-slate/editor/SlateEditor', () => {
@@ -101,12 +109,28 @@ describe('TestimonialQuote component', () => {
             value: 'Test quote',
             source: 'John Doe',
             extra: 'CEO',
-            image: {
-              '@type': 'URL',
-              value: 'value_url',
-              url: 'url_url',
-              href: 'href_url',
-            },
+            image: [
+              {
+                '@id': 'http://localhost:3000/image',
+                image_field: 'image',
+                image_scales: {
+                  image: [
+                    {
+                      download: '@@images/image.png',
+                      width: 400,
+                      height: 400,
+                      scales: {
+                        preview: {
+                          download: '@@images/image-400.png',
+                          width: 400,
+                          height: 400,
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
           }}
           mode="edit"
           onChangeBlock={mockOnChangeBlock}
@@ -137,12 +161,12 @@ describe('TestimonialQuote component', () => {
           data={{
             value: 'Test quote',
             extra: 'Test description',
-            image: {
-              '@type': 'URL',
-              value: 'value_url',
-              url: 'url_url',
-              href: 'href_url',
-            },
+            image: [
+              {
+                '@id': 'URL',
+                value: 'value_url',
+              },
+            ],
           }}
           selected={true}
           mode="edit"
@@ -171,12 +195,28 @@ describe('TestimonialQuote component', () => {
         <TestimonialQuote
           data={{
             value: 'Test quote',
-            image: {
-              '@type': 'URL',
-              value: 'value_url',
-              url: 'url_url',
-              href: 'href_url',
-            },
+            image: [
+              {
+                '@id': 'http://localhost:3000/image',
+                image_field: 'image',
+                image_scales: {
+                  image: [
+                    {
+                      download: '@@images/image.png',
+                      width: 400,
+                      height: 400,
+                      scales: {
+                        preview: {
+                          download: '@@images/image-400.png',
+                          width: 400,
+                          height: 400,
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
           }}
           selected={true}
           mode="edit"
