@@ -1,8 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Grid, Card, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { isInternalURL, flattenToAppURL } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
@@ -12,8 +12,8 @@ import {
 import {
   createSlateParagraph,
   serializeText,
-  getFieldURL,
 } from '@eeacms/volto-quote-block/helpers';
+import { getImageScaleParams } from '@eeacms/volto-object-widget/helpers';
 import Quote from './DefaultQuote';
 
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
@@ -30,7 +30,7 @@ function Divider({ ...rest }) {
   return <div className="eea divider" {...rest}></div>;
 }
 
-const Testimonial = (props) => {
+const Testimonial = React.memo((props) => {
   const { slate } = config.settings;
   const {
     data,
@@ -44,7 +44,10 @@ const Testimonial = (props) => {
     intl,
   } = props;
   const { value, source, extra, title } = data;
-  const image = getFieldURL(data.image);
+  const image = React.useMemo(
+    () => getImageScaleParams(data.image, 'preview'),
+    [data.image],
+  );
 
   const withBlockProperties = React.useCallback(
     (editor) => {
@@ -60,16 +63,28 @@ const Testimonial = (props) => {
     }
   }, [onSelectBlock, selected, block]);
 
+  const handleSlateChange = React.useCallback(
+    (newValue) => {
+      ReactDOM.unstable_batchedUpdates(() => {
+        onChangeBlock(block, {
+          ...data,
+          value: newValue,
+        });
+      });
+    },
+    [onChangeBlock, block, data],
+  );
+
+  const slateValue = React.useMemo(() => createSlateParagraph(value), [value]);
+
   return (
     <div className="eea testimonial">
       <Divider />
       <Grid>
         <Testimonial.Avatar
-          src={
-            isInternalURL(image)
-              ? `${flattenToAppURL(image)}/@@images/image/preview`
-              : image || DefaultImageSVG
-          }
+          src={image?.download || DefaultImageSVG}
+          width={image?.width || '100%'}
+          height={image?.height || 'auto'}
           title={source}
           description={extra}
         />
@@ -84,13 +99,8 @@ const Testimonial = (props) => {
                 properties={properties}
                 extensions={slate.textblockExtensions}
                 renderExtensions={[withBlockProperties]}
-                value={createSlateParagraph(value)}
-                onChange={(value) => {
-                  onChangeBlock(block, {
-                    ...data,
-                    value,
-                  });
-                }}
+                value={slateValue}
+                onChange={handleSlateChange}
                 block={block}
                 onFocus={handleFocus}
                 onKeyDown={handleKey}
@@ -107,15 +117,22 @@ const Testimonial = (props) => {
       <Divider />
     </div>
   );
-};
+});
 
-Testimonial.Avatar = ({ children, ...rest }) => {
+Testimonial.Avatar = ({ width, height, children, ...rest }) => {
   const { title, description } = rest;
   return (
     <Grid.Column mobile={12} tablet={3} computer={2}>
       <div className="avatar-wrapper">
         <Card className={`eea rounded small`} fluid={rest.fluid}>
-          <Image src={rest.src} wrapped ui={false} alt="card image" />
+          <Image
+            src={rest.src}
+            wrapped
+            ui={false}
+            alt=""
+            width={width}
+            height={height}
+          />
           {title || description ? (
             <Card.Content>
               {title && <Card.Header>{serializeText(title)}</Card.Header>}
