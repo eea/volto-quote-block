@@ -11,6 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Quote"
+#: Blocks/Quote/schema
+msgid "Quote"
+msgstr "Zitat"
+
 #. Default: "Quote (default)"
 #: Blocks/Quote/index
 msgid "Quote (default)"
@@ -51,11 +56,6 @@ msgstr "Zusätzliche Infos"
 #: Blocks/Quote/variations/index
 msgid "image"
 msgstr "Bild"
-
-#. Default: "Quote"
-#: Blocks/Quote/schema
-msgid "Quote"
-msgstr "Zitat"
 
 #. Default: "Reversed"
 #: Blocks/Quote/variations/index

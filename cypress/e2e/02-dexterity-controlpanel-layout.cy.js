@@ -18,7 +18,7 @@ describe('ControlPanel: Dexterity Content-Types Layout', () => {
     );
     cy.get('#page-controlpanel-layout button').click();
 
-    // Wait a bit for draftjs to load, without this the title block
+    // Wait a bit for slate to load, without this the title block
     // custom placeholder is missing and cypress gives a timeout error
     cy.wait(1000);
     cy.get('input[id="field-placeholder"]').type('Book title');
@@ -62,20 +62,21 @@ describe('ControlPanel: Dexterity Content-Types Layout', () => {
     cy.get('.block.quote:nth(1) div[role="textbox"]')
       .click()
       .type('My default quote');
-    cy.get('.block.quote:nth(2) div[role="textbox"]')
-      .click()
-      .type('My testimonial quote');
+    cy.get('.block.quote:nth(2) div[role="textbox"]').click();
     cy.get('.form .field-wrapper-image .input input')
       .click()
       .type(
         'https://eea.github.io/volto-eea-design-system/img/eea_icon.png{enter}',
       );
     cy.get('.form .field-wrapper-image .buttons .primary .icon').click();
+    cy.get('.block.quote:nth(2) div[role="textbox"]')
+      .click()
+      .type('My testimonial quote');
 
-    cy.get('#toolbar-save').click();
     cy.get('.documentFirstHeading').contains('My First Book');
-    cy.get('.block-editor-quote').contains('My default quote');
-    cy.get('.block-editor-quote').contains('My testimonial quote');
+    cy.get('.eea.quote').contains('My default quote');
+    cy.get('#toolbar-save').click();
+    cy.get('.testimonial').contains('My testimonial quote');
     cy.get('.testimonial .image img').should(
       'have.attr',
       'src',
