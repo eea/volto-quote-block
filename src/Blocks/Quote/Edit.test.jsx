@@ -23,14 +23,14 @@ jest.mock('@plone/volto/components/manage/Sidebar/SidebarPortal', () => {
   return ({ children }) => <div data-testid="sidebar-portal">{children}</div>;
 });
 
-jest.mock('@plone/volto/components/manage/Form', () => ({
-  BlockDataForm: (props) => (
+jest.mock('@plone/volto/components/manage/Form/BlockDataForm', () => {
+  return (props) => (
     <div data-testid="block-data-form">
       <p>Mocked BlockDataForm</p>
       <input data-testid="block-data-input" onChange={props.onChangeField} />
     </div>
-  ),
-}));
+  );
+});
 
 const mockStore = configureStore([]);
 
