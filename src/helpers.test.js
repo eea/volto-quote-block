@@ -1,4 +1,4 @@
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 import config from '@plone/volto/registry';
 import { createSlateParagraph, serializeText, isFloated } from './helpers';
