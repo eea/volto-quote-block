@@ -1,27 +1,35 @@
+import { vi } from 'vitest';
 import isArray from 'lodash/isArray';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 import config from '@plone/volto/registry';
 import { createSlateParagraph, serializeText, isFloated } from './helpers';
 
-jest.mock('@plone/volto/registry', () => ({
+vi.mock('@plone/volto/registry', () => ({
+  default: {
+    settings: {
+      slate: {
+        defaultValue: vi.fn(),
+      },
+    },
+  },
   settings: {
     slate: {
-      defaultValue: jest.fn(),
+      defaultValue: vi.fn(),
     },
   },
 }));
 
-jest.mock('@plone/volto-slate/editor/render', () => ({
-  serializeNodes: jest.fn(),
+vi.mock('@plone/volto-slate/editor/render', () => ({
+  serializeNodes: vi.fn(),
 }));
 
 describe('createSlateParagraph', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
-    jest.resetModules();
+    vi.resetModules();
   });
 
   it('should return default value when input is not an array', () => {
@@ -39,12 +47,12 @@ describe('createSlateParagraph', () => {
 
 describe('serializeText', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.resetModules();
-    jest.clearAllMocks();
+    vi.resetModules();
+    vi.clearAllMocks();
   });
 
   it('should return the text when it is not an array', () => {
