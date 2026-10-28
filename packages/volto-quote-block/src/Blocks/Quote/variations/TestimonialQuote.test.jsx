@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
@@ -15,10 +16,10 @@ config.settings = {
   },
 };
 
-jest.mock('@plone/volto/helpers/Url/Url', () => ({
-  flattenToAppURL: jest.fn((url) => url),
-  isInternalURL: jest.fn((url) => url),
-  getFieldURL: jest.fn((data) => {
+vi.mock('@plone/volto/helpers/Url/Url', () => ({
+  flattenToAppURL: vi.fn((url) => url),
+  isInternalURL: vi.fn((url) => url),
+  getFieldURL: vi.fn((data) => {
     if (Array.isArray(data)) {
       return data.map(
         (item) => item.value || item.url || item.href || item['@id'] || item,
@@ -28,25 +29,27 @@ jest.mock('@plone/volto/helpers/Url/Url', () => ({
   }),
 }));
 
-jest.mock('@plone/volto-slate/editor/SlateEditor', () => {
-  return ({ onChange, onKeyDown, placeholder, onFocus }) => (
-    <input
-      data-testid="mockedSlateEditor"
-      placeholder={placeholder}
-      onChange={onChange}
-      onKeyDown={(event) => {
-        const mockHandleKey = jest.fn();
-        if (onKeyDown) {
-          onKeyDown(event, mockHandleKey);
-        }
-      }}
-      onFocus={onFocus}
-    />
-  );
+vi.mock('@plone/volto-slate/editor/SlateEditor', () => {
+  return {
+    default: ({ onChange, onKeyDown, placeholder, onFocus }) => (
+      <input
+        data-testid="mockedSlateEditor"
+        placeholder={placeholder}
+        onChange={onChange}
+        onKeyDown={(event) => {
+          const mockHandleKey = vi.fn();
+          if (onKeyDown) {
+            onKeyDown(event, mockHandleKey);
+          }
+        }}
+        onFocus={onFocus}
+      />
+    ),
+  };
 });
 
-jest.mock('@plone/volto-slate/blocks/Text/keyboard', () => ({
-  handleKey: jest.fn(),
+vi.mock('@plone/volto-slate/blocks/Text/keyboard', () => ({
+  handleKey: vi.fn(),
 }));
 
 describe('TestimonialQuote component', () => {
@@ -63,7 +66,7 @@ describe('TestimonialQuote component', () => {
         messages: {},
       },
     });
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render TestimonialQuote component in view mode', () => {
@@ -100,8 +103,8 @@ describe('TestimonialQuote component', () => {
   });
 
   it('should call onChangeBlock when the quote is edited and onSelectBlock when in focus', () => {
-    const mockOnChangeBlock = jest.fn();
-    const mockOnSelectBlock = jest.fn();
+    const mockOnChangeBlock = vi.fn();
+    const mockOnSelectBlock = vi.fn();
     const { getByText, getByPlaceholderText } = render(
       <Provider store={store}>
         <TestimonialQuote
@@ -153,8 +156,8 @@ describe('TestimonialQuote component', () => {
   });
 
   it('should call onChangeBlock when the quote is edited but not call onSelectBlock, and should render description', () => {
-    const mockOnChangeBlock = jest.fn();
-    const mockOnSelectBlock = jest.fn();
+    const mockOnChangeBlock = vi.fn();
+    const mockOnSelectBlock = vi.fn();
     const { getByText, getByPlaceholderText } = render(
       <Provider store={store}>
         <TestimonialQuote
@@ -188,8 +191,8 @@ describe('TestimonialQuote component', () => {
   });
 
   it('should not render title or description', () => {
-    const mockOnChangeBlock = jest.fn();
-    const mockOnSelectBlock = jest.fn();
+    const mockOnChangeBlock = vi.fn();
+    const mockOnSelectBlock = vi.fn();
     const { getByPlaceholderText } = render(
       <Provider store={store}>
         <TestimonialQuote
@@ -238,7 +241,7 @@ describe('TestimonialQuote component', () => {
   });
 
   it('should preserve slate text when image data changes', () => {
-    const mockOnChangeBlock = jest.fn();
+    const mockOnChangeBlock = vi.fn();
     const initialData = {
       value: 'Test quote content',
       image: [

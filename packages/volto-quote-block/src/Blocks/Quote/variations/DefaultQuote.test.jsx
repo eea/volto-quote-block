@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -8,15 +9,24 @@ import { IntlProvider } from 'react-intl';
 
 const mockStore = configureStore([]);
 
-jest.mock('@plone/volto/registry', () => ({
+vi.mock('@plone/volto/registry', () => ({
+  default: {
+    settings: {
+      slate: {
+        defaultValue: vi.fn(() => 'default value'),
+      },
+    },
+  },
   settings: {
     slate: {
-      defaultValue: jest.fn(() => 'default value'),
+      defaultValue: vi.fn(() => 'default value'),
     },
   },
 }));
 
-jest.mock('@plone/volto-slate/editor/SlateEditor', () => () => <textarea />);
+vi.mock('@plone/volto-slate/editor/SlateEditor', () => ({
+  default: () => <textarea />,
+}));
 
 describe('Quote', () => {
   let store;
@@ -29,7 +39,7 @@ describe('Quote', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders the Quote component', () => {
